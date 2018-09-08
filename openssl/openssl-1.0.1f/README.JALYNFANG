@@ -1,0 +1,82 @@
+
+ OpenSSL 1.0.1f 
+ All rights reserved.
+
+ DESCRIPTION
+ -----------
+
+view topdir INSTALL:
+
+ [If any of these steps fails, see section Installation in Detail below.]
+
+ This will build and install OpenSSL in the default location, which is (for
+ historical reasons) /usr/local/ssl. If you want to install it anywhere else,
+ run config like this:
+
+  $ ./config --prefix=/usr/local --openssldir=/usr/local/openssl
+
+
+
+
+Configuration Options
+ ---------------------
+  --prefix=DIR  Install in DIR/bin, DIR/lib, DIR/include/openssl.
+	        Configuration files used by OpenSSL will be in DIR/ssl
+                or the directory specified by --openssldir.
+
+  --openssldir=DIR Directory for OpenSSL files. If no prefix is specified,
+                the library files and binaries are also installed there.
+
+  no-shared     Don't try to create shared libraries.
+
+  shared        In addition to the usual static libraries, create shared
+                libraries on platforms where it's supported.  See "Note on
+                shared libraries" below.
+
+  no-asm        Do not use assembler code.
+
+
+
+ ------------------------- ------------------------- ------------------------- ------------------------- -------------------------
+
+
+记录imx6ul平台下的交叉编译：
+ ------------------------- 
+
+
+1.配置：
+
+配置编译环境；（由于该版本没有CROSS_COMPILE的配置，又不想去Makefile里面设置,便在编译的终端环境变量里配置了）
+#set compile env
+#export PATH=$PATH:$CROSS_COMPILE_ENV
+#export CC=arm-arago-linux-gnueabi-gcc
+
+./config no-asm shared --prefix=$INSTALL_PATH_NAME --openssldir=$INSTALL_PATH_NAME"/ssl"
+
+2.vim Makefile 
+去掉-m64  (因为３２位平台的ＡＲＭ)
+
+3.
+make && make install
+
+记录am335x平台下的交叉编译：
+ ------------------------- 
+
+参考上诉即可。
+
+
+记录：
+	该库如果没有加　shared　配置项的话，默认配置是静态库，如果先编译出了静态库，
+这时要再编译动态库，遇到的情况是执行make clean 有部分会报错，再重新make 就会报链接库错误了，
+目前解决办法是删掉源码，重新解压，配置编译就ＯＫ了。　	
+
+
+
+
+
+
+
+
+
+
+	

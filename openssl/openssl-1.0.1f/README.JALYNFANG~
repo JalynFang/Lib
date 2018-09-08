@@ -1,0 +1,67 @@
+
+ OpenSSL 1.0.1f 
+ All rights reserved.
+
+ DESCRIPTION
+ -----------
+
+view topdir INSTALL:
+
+ [If any of these steps fails, see section Installation in Detail below.]
+
+ This will build and install OpenSSL in the default location, which is (for
+ historical reasons) /usr/local/ssl. If you want to install it anywhere else,
+ run config like this:
+
+  $ ./config --prefix=/usr/local --openssldir=/usr/local/openssl
+
+
+
+
+Configuration Options
+ ---------------------
+  --prefix=DIR  Install in DIR/bin, DIR/lib, DIR/include/openssl.
+	        Configuration files used by OpenSSL will be in DIR/ssl
+                or the directory specified by --openssldir.
+
+  --openssldir=DIR Directory for OpenSSL files. If no prefix is specified,
+                the library files and binaries are also installed there.
+
+  no-shared     Don't try to create shared libraries.
+
+  shared        In addition to the usual static libraries, create shared
+                libraries on platforms where it's supported.  See "Note on
+                shared libraries" below.
+
+  no-asm        Do not use assembler code.
+
+
+
+ ------------------------- ------------------------- ------------------------- ------------------------- -------------------------
+
+
+记录imx6ul平台下的交叉编译：
+ ------------------------- 
+
+
+1.配置：
+./config no-asm shared
+
+2.vim Makefile 
+去掉-m64  (因为３２位平台的ＡＲＭ)
+
+3.
+make && make install
+
+
+
+
+
+
+
+
+
+
+
+
+	
