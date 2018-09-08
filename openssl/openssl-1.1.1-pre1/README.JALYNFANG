@@ -1,0 +1,65 @@
+
+ OpenSSL 1.1.1-pre1 (alpha) 13 Feb 2018
+ All rights reserved.
+
+ DESCRIPTION
+ -----------
+
+view topdir INSTALL:
+ If you want to install it anywhere else, run config like this:
+
+  On Unix:
+
+    $ ./config --prefix=/opt/openssl --openssldir=/usr/local/ssl
+
+
+Configuration Options
+ ---------------------
+
+	--cross-compile-prefix=PREFIX
+
+If you have any problems with OpenSSL then please take the following steps
+ first:
+
+    - Download the latest version from the repository
+      to see if the problem has already been addressed
+    - Configure with no-asm
+    - Remove compiler optimization flags
+
+Notes on shared libraries
+ -------------------------
+
+ For most systems the OpenSSL Configure script knows what is needed to
+ build shared libraries for libcrypto and libssl. On these systems
+ the shared libraries will be created by default. This can be suppressed and
+ only static libraries created by using the "no-shared" option. On systems
+ where OpenSSL does not know how to build shared libraries the "no-shared"
+ option will be forced and only static libraries will be created.
+
+
+ ------------------------- ------------------------- ------------------------- ------------------------- -------------------------
+
+
+记录imx6ul平台下的交叉编译：
+ ------------------------- 
+1.
+./config no-asm --prefix=$(install_path) --openssldir=$(install_path)/ssl --cross-compile-prefix=$(cross_compile_prefix)
+
+2.vim Makefile 
+去掉-m64  (因为３２位平台的ＡＲＭ)
+
+3.
+make && make install
+
+
+
+
+
+
+
+
+
+
+
+
+	
